@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ExampleDirective } from './directives/example.directive';
+import { CustomifDirective } from './directives/customif.directive';
+import { CustomforDirective } from './directives/customfor.directive';
 import {
   NgFor,
   NgIf,
@@ -10,6 +12,7 @@ import {
   NgSwitchCase,
   NgSwitchDefault,
 } from '@angular/common';
+import { log } from 'console';
 
 @Component({
   selector: 'my-app',
@@ -24,6 +27,8 @@ import {
     NgSwitchCase,
     NgSwitchDefault,
     ExampleDirective,
+    CustomifDirective,
+    CustomforDirective,
   ],
   template: `
     <h1>{{ title }}</h1>
@@ -64,6 +69,16 @@ import {
     <h1>Custom Directive</h1>
     <div appExample background="pink" color="blue">merhaba</div>
     <div class="appExample">merhaba</div>
+    <div *appCustomif="show">Custom IF</div>
+    <button (click)="hide()">Click ME!!</button>
+    <!--
+    <ul>
+      <li *appCustomfor="5; let i = index">Mert {{ i }}</li>
+    </ul>
+     -->
+    <ul>
+      <li *appCustomfor="names; let i = index">{{ names[i] }}</li>
+    </ul>
   `,
   styleUrls: ['./app.component.css'],
 })
@@ -79,4 +94,8 @@ export class AppComponent {
   names: string[] = ['Mert', 'Can', 'Yağmur', 'Merve', 'Buket'];
   visible: boolean = false;
   myNumber: number = 3;
+  show: boolean = true;
+  hide() {
+    this.show = !this.show;
+  }
 }
