@@ -1,0 +1,24 @@
+<div style="background-color: aqua">
+  <ng-content select="header"></ng-content>
+</div>
+<!-- <div style="background-color: yellow">
+  <ng-content select="body"></ng-content>
+</div> -->
+<div style="background-color: red">
+  <ng-content select="footer"></ng-content>
+</div>
+<div class="name-container">
+  <ng-content select=".name"></ng-content>
+</div>
+<div class="container">
+  <ul>
+    <ng-container *ngFor="let product of products">
+      <li *ngIf="product.available; else noProduct">
+        {{ product.productName }}
+      </li>
+      <ng-template #noProduct>
+        <li>No Product Name</li>
+      </ng-template>
+    </ng-container>
+  </ul>
+</div>
